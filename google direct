@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset='utf-8'/>
+<meta content='IE=9; IE=8; IE=7; IE=EDGE; chrome=1' http-equiv='X-UA-Compatible'/>
+<title>Title Blog</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:300,300i,500,500i,700,900' rel='stylesheet' type='text/css'/>
 <style type='text/css'>
 a:link{text-decoration:none}
 h2 {font-size: 2em !important} #linkpaste { min-width: 95%; font-family: Courier; font-size: .9em; background: #F7F7F7; margin: 1em auto; padding: 1em 1em 1em; border: 1px solid #DDD; } #cde:focus{ border: 1px solid black; } .instruc{ width: 48%; float: left;}.notes{ width: 48%; float: right;}.instruc h2, .notes h2{ font-size: 1.3em; border-bottom: 1px solid #ff7200; padding-bottom: .2em; margin-bottom: .3em;}.instruc ol, .notes ul{ margin-left: 20px;} #cde { width: 100%; height: 25px; padding: 0 .2em; margin:1em auto; font-size: 1em; font-family: Helvatica, sans-serif; } label {font-family: Georgia;font-size: 1.5em;}.block{ padding-top: 1em; margin-bottom: 1em;}#but{ border-radius:8px; background: #32A4D6; color: #fff; font-family: Helvatica, Arial, Tahoma, sans-serif; font-size: 1.2em; padding: 5px 5px; cursor:pointer; margin: 0em auto 1em; display: block; min-width: 30%; clear: both;} iframe { margin:0em auto 1em; display: block; position:relative; max-width: 100%; }
@@ -9,6 +13,18 @@ h2 {font-size: 2em !important} #linkpaste { min-width: 95%; font-family: Courier
 </style>
 </head>
 <body>
+<div class="block"><label for="cde">Enter Share link:</label> <input id="cde" onkeydown="if (event.keyCode == 13) $('but').click()" placeholder="e.g., https://drive.google.com/file/d/0B0k76GMavVymS2RPY3RGTzgwVzg/view?usp=sharing" type="text" /><br />
+<br />
+<button id="but">Generate</button> <label for="linkpaste">Direct Download link:</label> <input id="linkpaste" readonly="" type="text" /></div><div class="update"><p><b style="color:red;">Update: </b> Tired of using this tool? Within seconds you can  <br />
+generate direct download links for the files inside chosen Google drive folders or just for all your Google drive files. Try <a target='_blank' href="https://chrome.google.com/webstore/detail/drive-direct-links/ngpoldeingjjfdakifaogalmonjjdblm">Drive Direct Links add-on</a>.</p><p><b style='color:red;'>Update: </b>On Jan 29, 2018, this tool was updated to work with all Google drive links. (i.e) Documents, Spreadsheets &amp; Presentations. All type of Google documents will be downloaded in <mark>PDF</mark> format, However, you can change this behaviour. Just alter the download link according to the instructions below:</p><p>From <code>format=pdf</code>, for <code>doc</code> change it to <code>format=doc</code>, for <code>xlsx</code>, <code>format=xlsx</code>, for <code>pptx</code>, change it to <code>format=pptx</code>.</p></div><div class="instruc"><h2>How to create direct links with this tool?</h2><ol><li>First you must obtain the share URL.</li>
+<li>Paste that link in the 'Enter Share link' textbox.</li>
+<li>Then, press Enter or click Generate.</li>
+<li>Press Ctrl + C to copy the direct link to your clipboard.</li>
+</ol></div><div class="notes"><h2>Important notes</h2><ul><li>You can save this page by pressing Ctrl + S and use it whenever you need.</li>
+<li>This tool will work only for Google Drive, Dropbox and Onedrive links only.</li>
+</ul></div><div style="clear: both;"></div><div id="frameContainer"></div>
+</div>
+<div class='clear'></div>
 <script>
 //<![CDATA[
 function $(e){return document.getElementById(e)}function generatelink(){var e=$("cde").value,n=e.indexOf("google.com"),t=e.indexOf("dropbox.com/s"),l=e.indexOf("onedrive.live.com");if(-1!=n){var i=e.indexOf("d/"),d=e.indexOf("/edit"),o=e.slice(i+2,d),a="https://docs.google.com/$type/d/"+o+"/export?format=pdf";-1!==e.indexOf("document")?a=a.replace("$type","document"):-1!==e.indexOf("spreadsheet")?a=a.replace("$type","spreadsheets"):-1!==e.indexOf("presentation")?a=a.replace("$type","presentation"):(d=e.indexOf("/view"),a="https://drive.google.com/uc?export=download&id="+(o=e.slice(i+2,d))),$("linkpaste").value=a,$("linkpaste").select()}else if(-1!=t){a=e.replace("?dl=0","?dl=1");$("linkpaste").value=a,$("linkpaste").select()}else if(-1!=l){a=e.replace("redir","download");$("linkpaste").value=a,$("linkpaste").select()}else $("linkpaste").value="THE URL IS INVALID"}window.onload=function(){$("cde").focus(),$("but").onclick=generatelink};
